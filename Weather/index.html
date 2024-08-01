@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Weather</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+    .fade-in {
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+    .fade-in.show {
+        opacity: 1;
+    }</style>
+</head>
+
+<body>
+
+    <div class="card m-auto " style="margin: 100px auto 0 !important;">
+        <div class="card-body">
+            <div class="search input-group mt-0 pt-4 w-100 d-flex flex-1 align-items-center justify-content-between">
+                <input class="form-control pe-2 mx-1  rounded-pill" type="search" placeholder="Enter City Name"
+                    spellcheck="false">
+                <button class="form-control-sm rounded-circle"><img src="images/search.png"></button>
+            </div>
+            <div class="error text-left ms-4 ">
+                <p>Invalid City Name</p>
+            </div>
+            <div class="weather justify-content-center text-center fadein show">
+                <img src="images/rain.png" class="weather-icon ">
+                <h1 class="temp ">22°C</h1>
+                <h2 class="city pb-2 fs-4">New York</h2>
+                <div class="details row mx-1 my-1 mb-3">
+                    <div class="col pe-4 pt-1 d-flex align-items-center justify-content-between">
+                        <img class="pt-2" src="images/humidity.png" alt="">
+                        <div class="col py-2">
+                            <p class="humidity">50%</p>
+                            <p>Humidity</p>
+                        </div>
+                    </div>
+                    <div class="col ps-3 d-flex align-items-center justify-content-between">
+                        <img src="images/wind.png" alt="">
+                        <div class="col py-1">
+                            <p class="wind">15 km/hr</p>
+                            <p class="speed mb-0">Wind Speed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <script>
+        const apiKey = "99c8f191087067251087145422d7b593";
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=";
+        const searchBox = document.querySelector(".search input");
+        const searchBtn = document.querySelector(".search button");
+        const weatherIcon = document.querySelector(".weather-icon");
+
+        async function checkWeather(city) {
+            const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+
+            if (response.status == 404) {
+                document.querySelector(".error").style.display = "block";
+                document.querySelector(".weather").style.display = "none";
+            }
+            else {
+                var data = await response.json();
+
+                document.querySelector(".city").innerHTML = data.name;
+                document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + " °C";
+                document.querySelector(".humidity").innerHTML = data.main.humidity + " %";
+                document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+
+                if (data.weather[0].main == "Clouds") {
+                    weatherIcon.src = "images/clouds.png";
+                }
+                else if (data.weather[0].main == "Clear") {
+                    weatherIcon.src = "images/clear.png";
+                }
+                else if (data.weather[0].main == "Rain") {
+                    weatherIcon.src = "images/rain.png";
+                }
+                else if (data.weather[0].main == "Drizzle") {
+                    weatherIcon.src = "images/drizzle.png";
+                }
+                else if (data.weather[0].main == "Mist") {
+                    weatherIcon.src = "images/mist.png";
+                }
+                document.querySelector(".weather").style.display = "block";
+                document.querySelector(".error").style.display = "none";
+            }
+
+
+        }
+
+        searchBtn.addEventListener("click", () => {
+            checkWeather(searchBox.value);
+        });
+        searchBox.addEventListener("keypress", (event) => {
+            if (event.key === 'Enter') {
+                checkWeather(searchBox.value);
+            }
+        });
+
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+*{
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+    justify-content: center !important;
+    align-items: center;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.card{
+    background-color: #3EECAC;
+    background-image: linear-gradient(19deg, #3EECAC 0%, #EE74E1 100%);
+
+    min-height: 100px;
+    max-width: 50vh;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0px 10px 60px #565656 !important;
+}
+.weather{
+    display: none;
+}
+.search{
+    width: 100% !important;
+    height: 100px !important;
+    padding-bottom: 15px !important;
+}
+.error{
+    color: #ffffffdb;
+    display: none;
+    padding-bottom: 10px !important;
+}
+.search button{
+    background-color: #ebfffc;
+    border: 0;
+    width: 50px;
+    height: 50px;
+}
+.search button img{
+    height: 1.7em;
+    padding-bottom: 2px !important;
+}
+.search input{
+    color: #555 !important;
+    background: #ebfffc;
+
+}
+.form-control{
+    border: 0;
+    outline: 0;
+    border-radius: 28px;
+    padding-left: 1.5em !important;
+    height: 2.7em;
+    font-size: 20px;
+    padding-bottom: 2px !important;
+}
+.form-control:focus{
+    background: #ebfffc;
+    outline: none;
+    border: none;
+    box-shadow: none;   
+}
+.weather{
+    color: #fff;
+}
+h1{
+    font-size:3.5em !important;
+}
+.details img{
+    width: 2.6em !important;
+}
+.col img{
+    margin-inline: 7px !important;
+    padding-top: 8px !important;
+}
+.col .col{
+    font-weight: bold !important;
+    text-align: left;
+    padding-left: 2px !important;
+    padding-top: 13px !important;
+}
+.col .col p{
+    font-size: 18px !important;
+}
